@@ -1,0 +1,47 @@
+!
+! based on: http://www.emacswiki.org/emacs/SwapControlAltAndCapsLock#toc8
+!
+
+!----------------------------------------------------------
+! Swap Control and Alt keys, both sides
+!----------------------------------------------------------
+
+! First clear all modifiers & control
+clear control
+clear mod1
+clear mod4
+
+! Nuke Num Lock
+keycode  77 = NoSymbol NoSymbol Num_Lock
+
+! Swap Control_L and Alt_L
+keycode 37 = Alt_L Meta_L
+keycode 64 = Control_L
+
+! Define Control_R and Alt_R similar to Control_L and Alt_L
+keycode 105 = Control_L
+keycode 108 = Alt_L Meta_L
+
+! We need to set keycodes first, as some programs (emacs!) read
+! the key names and seem to ignore what's below.
+add mod1    = Alt_L Alt_R Meta_L Meta_R
+add mod4    = Super_L Super_R
+add control = Control_L Control_R
+
+! programmer's dvorak
+keycode 10 = ampersand percent ampersand percent
+keycode 11 = bracketleft 7 bracketleft 7
+keycode 12 = braceleft 5 braceleft 5
+keycode 13 = braceright 3 braceright 3
+keycode 14 = parenleft 1 parenleft 1
+keycode 15 = equal 9 equal 9
+keycode 16 = asterisk 0 asterisk 0
+keycode 17 = parenright 2 parenright 2
+keycode 18 = plus 4 plus 4
+keycode 19 = bracketright 6 bracketright 6
+keycode 20 = exclam 8 exclam 8
+keycode 21 = numbersign grave numbersign grave
+keycode 24 = semicolon colon semicolon colon
+keycode 35 = at asciicircum at asciicircum
+keycode 49 = dollar asciitilde
+keycode 52 = apostrophe quotedbl apostrophe quotedbl

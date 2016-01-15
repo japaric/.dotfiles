@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# updates the rust nightly channel
+
+set -x
+
+# update toolchain
+multirust update nightly
+
+# update cargo packages
+cargo uninstall cargo-check
+cargo install --git https://github.com/rsolomo/cargo-check
+
+cargo uninstall cargo-edit
+cargo install --git https://github.com/killercup/cargo-edit
+
+cargo uninstall cargo-watch
+cargo install --git https://github.com/passcod/cargo-watch
+
+cargo uninstall dybuk
+cargo install --git https://github.com/Ticki/dybuk
+
+cargo uninstall scripts
+cargo install --path ~/rust/scripts
+
+set -e
+
+# fetch rust source
+hash=$(rustc -Vv | sed -n 3p | cut -d\  -f2)
+cd ~/rust
+rm -r nightly
+mkdir nightly
+cd nightly
+curl -L "https://github.com/rust-lang/rust/tarball/${hash}" | \
+  tar xz --strip-components 1

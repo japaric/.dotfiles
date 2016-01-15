@@ -1,0 +1,4 @@
+set complete=b
+set editor="st -e vim"
+set gui=nonavigation
+set hintchars=aoeuhtsn

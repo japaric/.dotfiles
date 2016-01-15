@@ -1,0 +1,35 @@
+#
+# bspwm hotkeys
+#
+
+alt + shift + c
+  bspc window -c
+
+alt + space
+  bspc window -t fullscreen
+
+alt + {_,shift + ,ctrl + shift + }{h,j,k,l}
+  bspc window -{f,s,p} {left,down,up,right}
+
+alt + ctrl + {h,j,k,l}
+  bspc window -e {left -6,down +11,up -11,right +6}
+
+alt + {a,o,e,u}
+  target={1-4}; desktop $target || bspc desktop -f $target
+
+alt + shift + {a,o,e,u}
+  bspc window -d ^{1-4}
+
+#
+# wm independent hotkeys
+#
+
+alt + shift + Return
+  st
+
+alt + x
+  dmenu_run -fn FiraCode-6
+
+# make sxhkd reload its configuration files:
+alt + r
+  pkill -USR1 -x sxhkd

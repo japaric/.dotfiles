@@ -1,0 +1,16 @@
+auto-reload yes
+browser xdg-open
+max-items 100
+refresh-on-startup yes
+reload-time 20
+show-read-feeds no
+unbind-key C
+
+color article                 color7 color0
+color background              color7 color0
+color info                    color8 color18
+color listfocus               color7 color19
+color listfocus_unread        color7 color19
+color listnormal              color7 color0
+color listnormal_unread       color4 color0
+highlight article "https?://[^ \n]+" color4 color0

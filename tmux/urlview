@@ -1,0 +1,5 @@
+capture-pane
+save-buffer /tmp/tmux-buffer
+run "tac /tmp/tmux-buffer > /tmp/tmux-reverse-buffer"
+run "rm /tmp/tmux-buffer"
+split-window "exec urlview /tmp/tmux-reverse-buffer"

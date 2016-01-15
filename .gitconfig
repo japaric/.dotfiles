@@ -1,0 +1,9 @@
+[merge]
+conflictstyle = diff3
+
+[push]
+default = simple
+
+[user]
+name = Jorge Aparicio
+email = japaricious@gmail.com

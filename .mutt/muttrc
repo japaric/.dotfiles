@@ -1,0 +1,30 @@
+# Sort
+set sort = threads
+
+# User
+set from = "japaricious@gmail.com"
+set realname = "Jorge Aparicio"
+
+# Cache
+set header_cache = "~/.cache/mutt"
+
+# IMAP
+set imap_keepalive = 300
+set imap_user = "japaricious@gmail.com"
+set mail_check = 120
+
+# SMTP
+set smtp_url = "smtp://$imap_user@smtp.gmail.com:587"
+
+# Folders
+set folder = "imaps://imap.gmail.com:993"
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set spoolfile = "+INBOX"
+
+# Editor
+set edit_headers
+set editor = vim
+
+# Color theme
+source ~/.dotfiles/dark.256.muttrc
