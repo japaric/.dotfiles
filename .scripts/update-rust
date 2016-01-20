@@ -20,6 +20,9 @@ cargo install --git https://github.com/passcod/cargo-watch
 cargo uninstall dybuk
 cargo install --git https://github.com/Ticki/dybuk
 
+cargo uninstall mpc
+cargo install --path ~/rust/mpc
+
 cargo uninstall rustfmt
 cargo install --git https://github.com/rust-lang-nursery/rustfmt
 
