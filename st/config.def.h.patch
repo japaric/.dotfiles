@@ -8,7 +8,7 @@ index 64e75b8..63f52b7 100644
   */
 -static char font[] = "Liberation Mono:pixelsize=12:antialias=false:autohint=false";
 -static int borderpx = 2;
-+static char font[] = "Fira Code:pixelsize=11:antialias=true:autohint=true";
++static char font[] = "Fira Code:pixelsize=10:antialias=true:autohint=true";
 +static int borderpx = 0;
  static char shell[] = "/bin/sh";
  static char *utmp = NULL;
