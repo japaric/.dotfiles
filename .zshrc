@@ -53,11 +53,11 @@ PATH="$PATH:$HOME/.rbenv/bin"
 PATH="$PATH:$HOME/.scripts"
 PATH="$PATH:$HOME/.shims"
 
-if [ -d ~/openwrt ]; then
-  toolchain=$(find ~/openwrt -maxdepth 1 -name 'toolchain*' -print -quit)
+if [ -d ~/openwrt/current ]; then
+  toolchain=$(find ~/openwrt/current/ -maxdepth 1 -name 'toolchain*' -print -quit)
   if [ ! -z $toolchain ]; then
     PATH="$PATH:$toolchain/bin"
-    export STAGING_DIR=~/openwrt
+    export STAGING_DIR=~/openwrt/current
   fi
   unset toolchain
 fi
