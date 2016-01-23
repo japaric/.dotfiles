@@ -66,35 +66,10 @@ else
 fi
 
 # create shims (only for exherbo, where only prefixed build tools exist)
-bins=(
-  addr2line
-  ar
-  as
-  c++
-  c++filt
-  cc
-  dwp
-  elfedit
-  g++
-  gcc
-  gcov
-  gfortran
-  gprof
-  ld
-  nm
-  objcopy
-  objdump
-  ranlib
-  readelf
-  size
-  strings
-  strip
-)
-
-mkdir -p ~/.shims
-for bin in ${bins[*]}; do
-  [ -f /usr/bin/$bin ] || ln -fs /usr/bin/x86_64-pc-linux-gnu-$bin ~/.shims/$bin
-done
+mkdir -p ~/.dotfiles/shims
+pushd ~/.dotfiles/shims
+../scripts/make-shims x86_64-pc-linux-gnu
+popd
 
 # create symlinks
 files=(

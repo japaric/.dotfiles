@@ -48,10 +48,10 @@ command -v colordiff >/dev/null 2>&1 && alias diff='colordiff'
 # env
 EDITOR=vim
 
+PATH="$PATH:$HOME/.dotfiles/scripts"
+PATH="$PATH:$HOME/.dotfiles/shims"
 PATH="$PATH:$HOME/.multirust/toolchains/nightly/cargo/bin"
 PATH="$PATH:$HOME/.rbenv/bin"
-PATH="$PATH:$HOME/.scripts"
-PATH="$PATH:$HOME/.shims"
 
 if [ -d ~/openwrt/current ]; then
   toolchain=$(find ~/openwrt/current/ -maxdepth 1 -name 'toolchain*' -print -quit)

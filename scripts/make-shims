@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Creates a shim for build tools
+#
+# Usage: make-shims $from $to
+#
+# Will create a bunch of symlinks of the form:
+#   $to-gcc -> $from-gcc
+# in the current directory
+#
+# If $to is not given, then the created shims are un-prefixed
+#   gcc -> $from-gcc
+
+set -e
+set -x
+
+from=$1
+to=$2
+
+if [ -z $from ]; then
+  exit 1
+fi
+
+tools=(
+  addr2line
+  ar
+  as
+  c++
+  c++filt
+  cc
+  dwp
+  elfedit
+  g++
+  gcc
+  gcov
+  gfortran
+  gprof
+  ld
+  nm
+  objcopy
+  objdump
+  pkg
+  ranlib
+  readelf
+  size
+  strings
+  strip
+)
+
+for tool in ${tools[*]}; do
+  if [ -z $to ]; then
+    ln -fs /usr/host/bin/$from-$tool $tool
+  else
+    ln -fs /usr/host/bin/$from-$tool $to-$tool
+  fi
+done
