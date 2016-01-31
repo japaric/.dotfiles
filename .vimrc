@@ -133,6 +133,7 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
+au FileType markdown setl sw=4 ts=4
 au FileType rust setl sw=4 ts=4
 
 " # Search enhancements
