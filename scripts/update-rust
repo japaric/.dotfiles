@@ -21,6 +21,9 @@ cargo install --git https://github.com/passcod/cargo-watch
 cargo uninstall dybuk
 cargo install --git https://github.com/Ticki/dybuk
 
+cargo uninstall mdbook
+cargo install --git https://github.com/azerupi/mdBook
+
 cargo uninstall mpd
 cargo install --path ~/rust/mpc
 
