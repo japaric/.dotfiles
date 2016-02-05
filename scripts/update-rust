@@ -41,8 +41,10 @@ set -e
 # fetch rust source
 hash=$(rustc -Vv | sed -n 3p | cut -d\  -f2)
 cd ~/rust
+chmod -R a+w nightly
 rm -r nightly
 mkdir nightly
 cd nightly
 curl -L "https://github.com/rust-lang/rust/tarball/${hash}" | \
   tar xz --strip-components 1
+chmod -R a-w .
