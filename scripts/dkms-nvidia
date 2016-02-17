@@ -7,7 +7,7 @@ set -e
 set -x
 
 HOST=x86_64-pc-linux-gnu
-VERSION=$(cave print-best-version nvidia-drivers | cut -d '-' -f4)
+VERSION=$(cave print-best-version nvidia-drivers | cut -d '-' -f4 | cut -d ':' -f1)
 
 # create expected source directory
 cd /usr/src
