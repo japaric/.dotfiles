@@ -64,5 +64,6 @@ fi
 
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
 command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 true
