@@ -12,8 +12,7 @@ cargo uninstall cargo-check
 cargo install --git https://github.com/rsolomo/cargo-check
 
 cargo uninstall cargo-edit
-#cargo install --git https://github.com/killercup/cargo-edit
-cargo install cargo-edit
+cargo install --git https://github.com/killercup/cargo-edit
 
 cargo uninstall cargo-outdated
 cargo install --git https://github.com/kbknapp/cargo-outdated
