@@ -50,7 +50,7 @@ EDITOR=vim
 
 PATH="$PATH:$HOME/.dotfiles/scripts"
 PATH="$PATH:$HOME/.dotfiles/shims"
-PATH="$PATH:$HOME/.multirust/toolchains/nightly/cargo/bin"
+PATH="$PATH:$(rustc --print sysroot)/cargo/bin"
 PATH="$PATH:$HOME/.rbenv/bin"
 
 if [ -d ~/openwrt/current ]; then
