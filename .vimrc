@@ -81,13 +81,8 @@ set relativenumber
 set scrolloff=99
 
 " - show line length limit
-set textwidth=80
-set colorcolumn=81
-
-autocmd FileType exheres-0 setlocal textwidth=100 colorcolumn=101
-autocmd FileType exlib setlocal textwidth=100 colorcolumn=101
-autocmd FileType markdown setlocal textwidth=100 colorcolumn=101
-autocmd FileType rust setlocal textwidth=100 colorcolumn=101
+set textwidth=100
+set colorcolumn=101
 
 " - highlight trailing spaces
 highlight TrailingSpaces ctermbg=1
