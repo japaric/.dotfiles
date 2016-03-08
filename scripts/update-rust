@@ -38,12 +38,11 @@ cargo install --path ~/rust/scripts
 set -e
 
 # fetch rust source
-hash=$(rustc -Vv | sed -n 3p | cut -d\  -f2)
-cd ~/rust
-chmod -R a+w nightly
-rm -r nightly
-mkdir nightly
-cd nightly
-curl -L "https://github.com/rust-lang/rust/tarball/${hash}" | \
-  tar xz --strip-components 1
-chmod -R a-w .
+if [ -d ~/rust/nightly ]; then
+  chmod -R a+w ~/rust/nightly
+  rm -r ~/rust/nightly
+  mkdir ~/rust/nightly
+fi
+curl -sL https://static.rust-lang.org/dist/rust-nightly-src.tar.gz | \
+  tar xz -C ~/rust/nightly --strip-components 1
+chmod -R a-w ~/rust/nightly
