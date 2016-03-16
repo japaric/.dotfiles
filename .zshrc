@@ -11,6 +11,10 @@ plugins=(
   zsh-syntax-highlighting
 )
 
+# cargo autocompletion
+command -v multirust >/dev/null 2>&1 && \
+  fpath=( $(rustc --print sysroot)/share/zsh/site-functions $fpath )
+
 source $ZSH/oh-my-zsh.sh
 
 # pure prompt
