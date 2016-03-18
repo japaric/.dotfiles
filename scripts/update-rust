@@ -5,7 +5,11 @@
 set -x
 
 # update toolchain
-multirust update nightly
+output=$(multirust update nightly | tee /dev/tty)
+
+if echo $output | grep -q 'is already up to date'; then
+  exit 0
+fi
 
 # update cargo packages
 cargo uninstall cargo-check
