@@ -43,6 +43,8 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_rust_src_path = $HOME."/rust/nightly/src"
 
 autocmd FileType rust nnoremap gd :YcmCompleter GoTo<CR>
+autocmd FileType rust nnoremap gld :vsplit<CR>:wincmd l<CR>:YcmCompleter GoTo<CR>
+autocmd FileType rust nnoremap gjd :split<CR>:wincmd j<CR>:YcmCompleter GoTo<CR>
 
 " - airline
 let g:airline#extensions#tabline#enabled = 1
