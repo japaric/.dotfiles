@@ -2,51 +2,76 @@
 
 # updates the rust nightly channel
 
-set -x
+set -ex
 
-# update toolchain
-output=$(multirust update nightly | tee /dev/tty)
+update_toolchain() {
+  output=$(multirust update nightly | tee /dev/tty)
 
-if echo $output | grep -q 'is already up to date'; then
-  exit 0
-fi
+  if echo $output | grep -q 'is already up to date'; then
+    exit 0
+  fi
+}
 
-# update cargo packages
-cargo uninstall cargo-check
-cargo install --git https://github.com/rsolomo/cargo-check
+uninstall() {
+  cargo uninstall $1 2>/dev/null || true
+}
 
-cargo uninstall cargo-edit
-cargo install --git https://github.com/killercup/cargo-edit
+# TODO(rust-lang/cargo#2405) use cargo install --update
+rebuild_packages() {
+  uninstall cargo-check
+  cargo install --git https://github.com/rsolomo/cargo-check
 
-cargo uninstall cargo-outdated
-cargo install --git https://github.com/kbknapp/cargo-outdated
+  uninstall cargo-edit
+  cargo install --git https://github.com/killercup/cargo-edit
 
-cargo uninstall cargo-watch
-cargo install --git https://github.com/passcod/cargo-watch
+  uninstall cargo-outdated
+  cargo install --git https://github.com/kbknapp/cargo-outdated
 
-cargo uninstall dybuk
-cargo install --git https://github.com/Ticki/dybuk
+  uninstall cargo-watch
+  cargo install --git https://github.com/passcod/cargo-watch
 
-cargo uninstall mdbook
-cargo install --git https://github.com/azerupi/mdBook
+  uninstall dybuk
+  cargo install --git https://github.com/Ticki/dybuk
 
-cargo uninstall mpd
-cargo install --path ~/rust/mpc
+  uninstall mdbook
+  cargo install --git https://github.com/azerupi/mdBook
 
-cargo uninstall rustfmt
-cargo install --git https://github.com/rust-lang-nursery/rustfmt
+  uninstall mpd
+  cargo install --path ~/rust/mpc
 
-cargo uninstall scripts
-cargo install --path ~/rust/scripts
+  uninstall rustfmt
+  cargo install --git https://github.com/rust-lang-nursery/rustfmt
 
-set -e
+  uninstall scripts
+  cargo install --path ~/rust/scripts
 
-# fetch rust source
-if [ -d ~/rust/nightly ]; then
-  chmod -R a+w ~/rust/nightly
-  rm -r ~/rust/nightly
-  mkdir ~/rust/nightly
-fi
-curl -sL https://static.rust-lang.org/dist/rust-nightly-src.tar.gz | \
-  tar xz -C ~/rust/nightly --strip-components 1
-chmod -R a-w ~/rust/nightly
+  pushd ~/rust/cargo-clippy
+  git pull
+  cargo clean
+  cargo update
+  cargo build --release
+  popd
+}
+
+fetch_src() {
+  local date=$(curl -sL https://static.rust-lang.org/dist/channel-rust-nightly.toml | grep date | cut -d'"' -f2)
+
+  if [ -d ~/rust/nightly ]; then
+    chmod -R a+w ~/rust/nightly
+    rm -r ~/rust/nightly
+    mkdir ~/rust/nightly
+  fi
+
+  curl -sL https://static.rust-lang.org/dist/$date/rustc-nightly-src.tar.gz | \
+    tar xz -C ~/rust/nightly --strip-components 1
+
+  chmod -R a-w ~/rust/nightly
+}
+
+main() {
+  update_toolchain
+  rebuild_packages
+  fetch_src
+}
+
+main
