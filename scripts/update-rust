@@ -54,7 +54,7 @@ rebuild_packages() {
 }
 
 fetch_src() {
-  local date=$(curl -sL https://static.rust-lang.org/dist/channel-rust-nightly.toml | grep date | cut -d'"' -f2)
+  local date=$(curl -sL https://static.rust-lang.org/dist/channel-rust-nightly-date.txt)
 
   if [ -d ~/rust/nightly ]; then
     chmod -R a+w ~/rust/nightly
