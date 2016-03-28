@@ -22,7 +22,7 @@ rebuild_packages() {
   cargo install --git https://github.com/rsolomo/cargo-check
 
   uninstall cargo-edit
-  cargo install --git https://github.com/killercup/cargo-edit
+  cargo install cargo-edit
 
   uninstall cargo-outdated
   cargo install --git https://github.com/kbknapp/cargo-outdated
