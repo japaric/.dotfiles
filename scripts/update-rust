@@ -37,13 +37,16 @@ rebuild_packages() {
   cargo install --git https://github.com/azerupi/mdBook
 
   uninstall mpd
-  cargo install --path ~/rust/mpc
+  cargo install --git https://github.com/japaric/mpc.rs
 
   uninstall rustfmt
   cargo install --git https://github.com/rust-lang-nursery/rustfmt
 
   uninstall scripts
-  cargo install --path ~/rust/scripts
+  cargo install --git https://github.com/japaric/scripts
+
+  uninstall xargo
+  cargo install --git https://github.com/japaric/xargo
 
   pushd ~/rust/cargo-clippy
   git pull
