@@ -107,7 +107,7 @@ mk_shims() {
     local g=$(basename $f)
     local h=${g#$prefix-}
     if [ -z $(echo $h | grep '\-\|\.') ]; then
-      ln -s /usr/bin/$prefix $h
+      ln -s $f $h
     fi
   done
   popd
@@ -142,16 +142,16 @@ mk_symlinks() {
 }
 
 main() {
-  check_deps
-  fetch_dotfiles
-  install_rbenv
-  install_pure
-  install_base16
-  install_oh_my_zsh
-  install_zsh_syntax_highlighting
-  install_vundle
+  #check_deps
+  #fetch_dotfiles
+  #install_rbenv
+  #install_pure
+  #install_base16
+  #install_oh_my_zsh
+  #install_zsh_syntax_highlighting
+  #install_vundle
   mk_shims
-  mk_symlinks
+  #mk_symlinks
 }
 
 main
