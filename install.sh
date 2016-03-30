@@ -83,7 +83,6 @@ files=(
   .gtkrc-2.0
   .mutt/muttrc
   .newsbeuter/config
-  .scripts
   .tigrc
   .tmux.conf
   .urlview
