@@ -6,10 +6,12 @@ plugins=(
   extract
   git
   systemd
-  tmux
   vi-mode
   zsh-syntax-highlighting
 )
+
+command -v tmux >/dev/null 2>&1 && \
+  plugins+=( tmux )
 
 # cargo autocompletion
 PATH="$HOME/.cargo/bin:$PATH"
