@@ -5,9 +5,9 @@
 set -ex
 
 update_toolchain() {
-  output=$(multirust update nightly | tee /dev/tty)
+  output=$(rustup update nightly | tee /dev/tty)
 
-  if echo $output | grep -q 'is already up to date'; then
+  if echo $output | grep -q 'nightly unchanged'; then
     exit 0
   fi
 }

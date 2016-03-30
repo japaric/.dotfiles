@@ -12,7 +12,8 @@ plugins=(
 )
 
 # cargo autocompletion
-command -v multirust >/dev/null 2>&1 && \
+PATH="$HOME/.cargo/bin:$PATH"
+command -v rustup >/dev/null 2>&1 && \
   fpath=( $(rustc --print sysroot)/share/zsh/site-functions $fpath )
 
 source $ZSH/oh-my-zsh.sh
@@ -54,7 +55,6 @@ EDITOR=vim
 
 PATH="$PATH:$HOME/.dotfiles/scripts"
 PATH="$PATH:$HOME/.dotfiles/shims"
-PATH="$PATH:$(rustc --print sysroot)/cargo/bin"
 PATH="$PATH:$HOME/.rbenv/bin"
 
 if [ -d ~/openwrt/current ]; then

@@ -22,6 +22,6 @@ fi
 
 # launch window manager
 numlockx on &
-PATH="${PATH}:${HOME}/.multirust/toolchains/nightly/cargo/bin" sxhkd &
+PATH="${PATH}:${HOME}/.cargo/bin" sxhkd &
 unclutter &
 exec bspwm
