@@ -142,16 +142,16 @@ mk_symlinks() {
 }
 
 main() {
-  #check_deps
-  #fetch_dotfiles
-  #install_rbenv
-  #install_pure
-  #install_base16
-  #install_oh_my_zsh
-  #install_zsh_syntax_highlighting
-  #install_vundle
+  check_deps
+  fetch_dotfiles
+  install_rbenv
+  install_pure
+  install_base16
+  install_oh_my_zsh
+  install_zsh_syntax_highlighting
+  install_vundle
   mk_shims
-  #mk_symlinks
+  mk_symlinks
 }
 
 main
