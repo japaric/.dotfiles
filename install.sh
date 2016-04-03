@@ -90,7 +90,8 @@ install_vundle() {
     git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
   fi
 
-  vim +PluginInstall +qall
+  ln -s ~/.dotfiles/.vimrc ~/.vimrc
+  printf "\n" | vim +PluginInstall +qall
 
   pushd ~/.vim/bundle/YouCompleteMe
   ./install.py --racer-completer
