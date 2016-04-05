@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# build nvidia modules
+
+set -ex
+
+cp_src() {
+    cp -r /usr/src/nvidia-drivers .
+}
+
+build_modules() {
+    pushd nvidia-drivers
+    make -j$(nproc)
+    popd
+}
+
+install_modules() {
+    sudo cp nvidia-drivers/*.ko /usr/lib/modules/$(uname -r)/kernel/drivers/video
+    sudo depmod
+}
+
+cleanup() {
+    rm -r nvidia-drivers
+}
+
+main() {
+    cp_src
+    build_modules
+    install_modules
+    cleanup
+}
+
+main
