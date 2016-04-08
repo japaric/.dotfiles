@@ -22,9 +22,9 @@ fork_install() {
 
     pushd $temp_dir
     if [[ $1 == *"https"* ]]; then
-        cargo install --git $1 &
+        nice -n10 cargo install --git $1 &
     else
-        cargo install $1 &
+        nice -n10 cargo install $1 &
     fi
     handles+=( $!-$temp_dir )
 
@@ -57,9 +57,6 @@ rebuild_packages() {
   uninstall cargo-watch
   fork_install https://github.com/passcod/cargo-watch
 
-  uninstall dybuk
-  fork_install https://github.com/Ticki/dybuk
-
   uninstall mdbook
   fork_install https://github.com/azerupi/mdBook
 
@@ -82,7 +79,8 @@ rebuild_packages() {
   git pull
   cargo clean
   cargo update
-  cargo build --release
+  # note clippy breaks every now and then
+  nice -n10 cargo build --release || true
   popd
 
   join_installs
