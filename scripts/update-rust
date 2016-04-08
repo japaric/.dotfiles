@@ -16,37 +16,67 @@ uninstall() {
   cargo uninstall $1 2>/dev/null || true
 }
 
+handles=()
+fork_install() {
+    local temp_dir=$(mktemp -d)
+
+    pushd $temp_dir
+    if [[ $1 == *"https"* ]]; then
+        cargo install --git $1 &
+    else
+        cargo install $1 &
+    fi
+    handles+=( $!-$temp_dir )
+
+    popd
+}
+
+join_installs() {
+    local pid temp_dir
+
+    for handle in "${handles[@]}"; do
+        pid=$(echo $handle | cut -d'-' -f1)
+        temp_dir=$(echo $handle | cut -d'-' -f2)
+
+        wait $pid
+        rm -r $temp_dir
+    done
+}
+
 # TODO(rust-lang/cargo#2405) use cargo install --update
 rebuild_packages() {
   uninstall cargo-check
-  cargo install --git https://github.com/rsolomo/cargo-check
+  fork_install https://github.com/rsolomo/cargo-check
 
   uninstall cargo-edit
-  cargo install cargo-edit
+  fork_install cargo-edit
 
   uninstall cargo-outdated
-  cargo install --git https://github.com/kbknapp/cargo-outdated
+  fork_install https://github.com/kbknapp/cargo-outdated
 
   uninstall cargo-watch
-  cargo install --git https://github.com/passcod/cargo-watch
+  fork_install https://github.com/passcod/cargo-watch
 
   uninstall dybuk
-  cargo install --git https://github.com/Ticki/dybuk
+  fork_install https://github.com/Ticki/dybuk
 
   uninstall mdbook
-  cargo install --git https://github.com/azerupi/mdBook
+  fork_install https://github.com/azerupi/mdBook
 
   uninstall mpd
-  cargo install --git https://github.com/japaric/mpc.rs
+  fork_install https://github.com/japaric/mpc.rs
+
+  uninstall racer
+  fork_install https://github.com/phildawes/racer
 
   uninstall rustfmt
-  cargo install --git https://github.com/rust-lang-nursery/rustfmt
+  fork_install https://github.com/rust-lang-nursery/rustfmt
 
   uninstall scripts
-  cargo install --git https://github.com/japaric/scripts
+  fork_install https://github.com/japaric/scripts
 
   uninstall xargo
-  cargo install --git https://github.com/japaric/xargo
+  fork_install https://github.com/japaric/xargo
 
   pushd ~/rust/cargo-clippy
   git pull
@@ -54,6 +84,8 @@ rebuild_packages() {
   cargo update
   cargo build --release
   popd
+
+  join_installs
 }
 
 fetch_src() {
