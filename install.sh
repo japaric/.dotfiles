@@ -13,13 +13,9 @@ need_cmd() {
 }
 
 check_deps() {
-  need_cmd cmake
   need_cmd curl
-  # this may not be available on exherbo in this unprefixed form
-  #need_cmd g++
+  need_cmd emacs
   need_cmd git
-  need_cmd python
-  need_cmd vim
   need_cmd zsh
 }
 
@@ -82,22 +78,6 @@ install_zsh_syntax_highlighting() {
   fi
 }
 
-install_vundle() {
-  if [ -d ~/.vim/bundle/Vundle.vim ]; then
-    git -C ~/.vim/bundle/Vundle.vim pull
-  else
-    mkdir -p ~/.vim/bundle
-    git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
-  fi
-
-  ln -s ~/.dotfiles/.vimrc ~/.vimrc
-  printf "\n" | vim +PluginInstall +qall
-
-  pushd ~/.vim/bundle/YouCompleteMe
-  ./install.py --racer-completer
-  popd
-}
-
 mk_shims() {
   local prefix=x86_64-pc-linux-gnu
 
@@ -126,11 +106,11 @@ mk_symlinks() {
     .gtkrc-2.0
     .mutt/muttrc
     .newsbeuter/config
+    .spacemacs
     .tigrc
     .tmux.conf
     .urlview
     .vimperatorrc
-    .vimrc
     .xinitrc
     .zprofile
     .zshrc
@@ -150,7 +130,6 @@ main() {
   install_base16
   install_oh_my_zsh
   install_zsh_syntax_highlighting
-  install_vundle
   mk_shims
   mk_symlinks
 }
