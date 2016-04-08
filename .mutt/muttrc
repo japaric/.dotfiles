@@ -24,7 +24,7 @@ set spoolfile = "+INBOX"
 
 # Editor
 set edit_headers
-set editor = vim
+set editor = edit
 
 # Color theme
 source ~/.dotfiles/dark.256.muttrc

@@ -7,3 +7,6 @@ default = simple
 [user]
 name = Jorge Aparicio
 email = japaricious@gmail.com
+
+[core]
+editor = edit
