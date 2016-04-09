@@ -78,6 +78,14 @@ install_zsh_syntax_highlighting() {
   fi
 }
 
+install_spacemacs() {
+    if [ -d ~/.dotfiles/.emacs.d ]; then
+        git -C ~/.dotfiles/.emacs.d pull
+    else
+        git clone https://github.com/syl20bnr/spacemacs ~/.dotfiles/.emacs.d
+    fi
+}
+
 mk_shims() {
   local prefix=x86_64-pc-linux-gnu
 
@@ -101,6 +109,7 @@ mk_symlinks() {
     .config/mpv/mpv.conf
     .config/redshift.conf
     .config/sxhkd/sxhkdrc
+    .emacs.d
     .gdbinit
     .gitconfig
     .gtkrc-2.0
@@ -130,6 +139,7 @@ main() {
   install_base16
   install_oh_my_zsh
   install_zsh_syntax_highlighting
+  install_spacemacs
   mk_shims
   mk_symlinks
 }
