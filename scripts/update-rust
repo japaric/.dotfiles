@@ -7,7 +7,7 @@ set -ex
 update_toolchain() {
   output=$(rustup update nightly | tee /dev/tty)
 
-  if echo $output | grep -q 'nightly unchanged'; then
+  if echo $output | grep -q 'nightly.*unchanged'; then
     exit 0
   fi
 }
