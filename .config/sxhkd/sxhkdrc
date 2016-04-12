@@ -6,13 +6,10 @@ alt + shift + c
   bspc node -c
 
 alt + space
-  bspc node -t fullscreen
+  bspc node -t '~fullscreen'
 
 alt + {_,shift + ,ctrl + shift + }{h,j,k,l}
-  bspc node -{f,s,p} {left,down,up,right}
-
-alt + ctrl + {h,j,k,l}
-  bspc node -e {left -6,down +11,up -11,right +6}
+  bspc node -{f,s,p} {west,south,north,east}
 
 alt + {a,o,e,u}
   target={1-4}; desktop $target || bspc desktop -f $target
