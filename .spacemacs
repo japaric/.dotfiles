@@ -32,7 +32,7 @@ values."
      org
      rust
      spell-checking
-     syntax-checking
+     (syntax-checking :variables syntax-checking-enable-by-default nil)
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
      )
