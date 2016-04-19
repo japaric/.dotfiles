@@ -5,11 +5,15 @@
 set -ex
 
 update_toolchain() {
-  output=$(rustup update nightly | tee /dev/tty)
+  local tf=$(mktemp)
+  rustup update nightly 2>&1 | tee $tf
 
-  if echo $output | grep -q 'nightly.*unchanged'; then
+  if cat $tf | grep -q 'nightly.*unchanged'; then
+    rm $tf
     exit 0
   fi
+
+  rm $tf
 }
 
 uninstall() {
@@ -47,6 +51,9 @@ join_installs() {
 rebuild_packages() {
   uninstall cargo-check
   fork_install https://github.com/rsolomo/cargo-check
+
+  uninstall cargo-clone
+  fork_install cargo-clone
 
   uninstall cargo-edit
   fork_install cargo-edit
