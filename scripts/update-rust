@@ -94,7 +94,7 @@ rebuild_packages() {
 }
 
 fetch_src() {
-  local date=$(curl -sL https://static.rust-lang.org/dist/channel-rust-nightly-date.txt)
+  local hash=$(rustc -Vv | grep commit-hash | cut -d' ' -f2)
 
   if [ -d ~/rust/nightly ]; then
     chmod -R a+w ~/rust/nightly
@@ -102,8 +102,10 @@ fetch_src() {
     mkdir ~/rust/nightly
   fi
 
-  curl -sL https://static.rust-lang.org/dist/$date/rustc-nightly-src.tar.gz | \
-    tar xz -C ~/rust/nightly --strip-components 1
+  curl -sL https://github.com/rust-lang/rust/archive/$hash.tar.gz | \
+      tar -xz -C ~/rust/nightly --strip-components 1
+
+  rm -r ~/rust/nightly/src/test
 
   chmod -R a-w ~/rust/nightly
 }
