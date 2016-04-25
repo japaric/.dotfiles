@@ -22,28 +22,18 @@ uninstall() {
 
 handles=()
 fork_install() {
-    local temp_dir=$(mktemp -d)
-
-    pushd $temp_dir
     if [[ $1 == *"https"* ]]; then
         nice -n10 cargo install --git $1 &
     else
         nice -n10 cargo install $1 &
     fi
-    handles+=( $!-$temp_dir )
-
-    popd
+    handles+=( $! )
 }
 
 join_installs() {
-    local pid temp_dir
-
-    for handle in "${handles[@]}"; do
-        pid=$(echo $handle | cut -d'-' -f1)
-        temp_dir=$(echo $handle | cut -d'-' -f2)
-
+    local pid
+    for pid in "${handles[@]}"; do
         wait $pid
-        rm -r $temp_dir
     done
 }
 
