@@ -9,7 +9,7 @@ set realname = "Jorge Aparicio"
 set header_cache = "~/.cache/mutt"
 
 # IMAP
-set imap_keepalive = 300
+set imap_keepalive = 120
 set imap_user = "japaricious@gmail.com"
 set mail_check = 120
 
