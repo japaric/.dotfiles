@@ -28,6 +28,8 @@ values."
      dockerfile
      emacs-lisp
      git
+     html
+     javascript
      markdown
      org
      rust
@@ -236,6 +238,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default rust-enable-racer t)
+  (setq-default web-mode-markup-indent-offset 2)
   )
 
 (defun dotspacemacs/user-config ()
@@ -245,11 +248,11 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
+  (add-hook 'cuda-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (setq-default fill-column 100)
-  (add-hook 'cuda-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
