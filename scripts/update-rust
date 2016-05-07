@@ -16,16 +16,12 @@ update_toolchain() {
   rm $tf
 }
 
-uninstall() {
-  cargo uninstall $1 2>/dev/null || true
-}
-
 handles=()
 fork_install() {
     if [[ $1 == *"https"* ]]; then
-        nice -n10 cargo install --git $1 &
+        nice -n10 cargo install -f --git $1 &
     else
-        nice -n10 cargo install $1 &
+        nice -n10 cargo install -f $1 &
     fi
     handles+=( $! )
 }
@@ -39,37 +35,26 @@ join_installs() {
 
 # TODO(rust-lang/cargo#2405) use cargo install --update
 rebuild_packages() {
-  uninstall cargo-check
   fork_install https://github.com/rsolomo/cargo-check
 
-  uninstall cargo-clone
   fork_install cargo-clone
 
-  uninstall cargo-edit
   fork_install cargo-edit
 
-  uninstall cargo-outdated
   fork_install https://github.com/kbknapp/cargo-outdated
 
-  uninstall cargo-watch
   fork_install https://github.com/passcod/cargo-watch
 
-  uninstall mdbook
   fork_install https://github.com/azerupi/mdBook
 
-  uninstall mpd
   fork_install https://github.com/japaric/mpc.rs
 
-  uninstall racer
   fork_install https://github.com/phildawes/racer
 
-  uninstall rustfmt
   fork_install https://github.com/rust-lang-nursery/rustfmt
 
-  uninstall scripts
   fork_install https://github.com/japaric/scripts
 
-  uninstall xargo
   fork_install https://github.com/japaric/xargo
 
   pushd ~/rust/cargo-clippy
