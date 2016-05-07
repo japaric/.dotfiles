@@ -4,7 +4,7 @@ if [ "$1" = "--off" ]; then
     xrandr --output DP-0 --auto --output HDMI-0 --off
     bspc monitor DP-0 -d 1 2 3 4
 else
-    xrandr --output DP-0 --auto --output HDMI-0 --auto --right-of DP-0
+    xrandr --output DP-0 --auto --output HDMI-0 --mode 1920x1080 --right-of DP-0
     bspc monitor DP-0 -d 1 2 3
     bspc monitor HDMI-0 -d 4
 fi
