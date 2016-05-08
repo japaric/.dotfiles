@@ -63,6 +63,9 @@ PATH="$PATH:$HOME/.rbenv/bin"
 export RUST_SRC_PATH=~/rust/nightly/src
 export CARGO_HOME=~/.cargo
 
+# for Rust
+export RUST_NEW_ERROR_FORMAT=true
+
 if [ -d ~/openwrt/current ]; then
   toolchain=$(find ~/openwrt/current/ -maxdepth 1 -name 'toolchain*' -print -quit)
   if [ ! -z $toolchain ]; then
