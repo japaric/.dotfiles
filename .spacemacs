@@ -43,7 +43,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(base16-theme cuda-mode)
+   dotspacemacs-additional-packages '(base16-theme
+                                      cuda-mode
+                                      (ld-mode :location (recipe :fetcher github
+                                                                 :repo "japaric/ld-mode")))
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -239,6 +242,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  (setq-default ld-mode-indent-width 2)
   (setq-default rust-enable-racer t)
   (setq-default web-mode-markup-indent-offset 2)
   )
@@ -251,6 +255,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
   (add-hook 'cuda-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
+  (add-hook 'ld-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
