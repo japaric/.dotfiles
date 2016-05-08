@@ -258,6 +258,7 @@ you should place you code here."
   (add-hook 'ld-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (setq-default fill-column 100)
   )
