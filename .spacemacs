@@ -240,10 +240,21 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (add-to-list 'auto-mode-alist '("\\.babelrc$" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsbeautifyrc$" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.jscsrc$" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.jshintrc$" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.tern-project$" . json-mode))
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  (setq-default css-indent-offset 2)
+  (setq-default js-indent-level 2)
+  (setq-default js2-basic-offset 2)
   (setq-default ld-mode-indent-width 2)
   (setq-default rust-enable-racer t)
+  (setq-default web-mode-attr-indent-offset 2)
+  (setq-default web-mode-code-indent-offset 2)
+  (setq-default web-mode-css-indent-offset 2)
   (setq-default web-mode-markup-indent-offset 2)
   )
 
@@ -255,9 +266,12 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
   (add-hook 'cuda-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
+  (add-hook 'js2-mode-hook 'flycheck-mode)
+  (add-hook 'json-mode-hook 'flycheck-mode)
   (add-hook 'ld-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'scss-mode-hook 'flycheck-mode)
   (add-hook 'text-mode-hook 'turn-on-auto-fill)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (setq-default fill-column 100)
