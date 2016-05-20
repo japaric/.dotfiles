@@ -274,6 +274,9 @@ you should place you code here."
   (add-hook 'scss-mode-hook 'flycheck-mode)
   (add-hook 'text-mode-hook 'turn-on-auto-fill)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
+  (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+  (setq backup-directory-alist `((".*" ,temporary-file-directory)))
+  (setq create-lockfiles nil)
   (setq-default fill-column 100)
   )
 
