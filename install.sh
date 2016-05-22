@@ -86,6 +86,15 @@ install_spacemacs() {
     fi
 }
 
+install_dropbox_uploader() {
+    if [ -d ~/.dotfiles/Dropbox-Uploader ]; then
+        git -C ~/.dotfiles/Dropbox-Uploader pull
+    else
+        git clone https://github.com/andreafabrizi/Dropbox-Uploader ~/.dotfiles/Dropbox-Uploader
+        ln -s ~/.dotfiles/{Dropbox-Uploader,scripts}/dropbox_uploader.sh
+    fi
+}
+
 mk_shims() {
     local prefix=x86_64-pc-linux-gnu
 
@@ -140,6 +149,7 @@ main() {
     install_oh_my_zsh
     install_zsh_syntax_highlighting
     install_spacemacs
+    install_dropbox_uploader
     mk_shims
     mk_symlinks
 }

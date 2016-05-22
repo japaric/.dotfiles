@@ -1,6 +1,8 @@
 .emacs.d
+Dropbox-Uploader
 base16-shell
 dark.256.muttrc
 oh-my-zsh
 pure
+scripts/dropbox_uploader.sh
 shims
