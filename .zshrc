@@ -56,7 +56,6 @@ command -v colordiff >/dev/null 2>&1 && alias diff='colordiff'
 EDITOR=edit
 
 PATH="$PATH:$HOME/.dotfiles/scripts"
-PATH="$PATH:$HOME/.dotfiles/shims"
 PATH="$PATH:$HOME/.rbenv/bin"
 
 # for racer

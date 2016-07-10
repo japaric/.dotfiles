@@ -95,22 +95,6 @@ install_dropbox_uploader() {
     fi
 }
 
-mk_shims() {
-    local prefix=x86_64-pc-linux-gnu
-
-    rm -rf ~/.dotfiles/shims
-    mkdir ~/.dotfiles/shims
-    pushd ~/.dotfiles/shims
-    for f in $(ls /usr/bin/$prefix-*); do
-        local g=$(basename $f)
-        local h=${g#$prefix-}
-        if [ -z $(echo $h | grep '\-\|\.') ]; then
-            ln -s $f $h
-        fi
-    done
-    popd
-}
-
 mk_symlinks() {
     local files=(
         .Xmodmap
@@ -150,7 +134,6 @@ main() {
     install_zsh_syntax_highlighting
     install_spacemacs
     install_dropbox_uploader
-    mk_shims
     mk_symlinks
 }
 
