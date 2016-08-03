@@ -5,90 +5,61 @@
 set -ex
 
 update_toolchain() {
-  local tf=$(mktemp)
-  rustup update nightly 2>&1 | tee $tf
+    local tf=$(mktemp)
+    rustup update nightly 2>&1 | tee $tf
 
-  if cat $tf | grep -q 'nightly.*unchanged'; then
-    rm $tf
-    exit 0
-  fi
-
-  rm $tf
-}
-
-handles=()
-fork_install() {
-    if [[ $1 == *"https"* ]]; then
-        nice -n10 cargo install -f --git $1 &
-    else
-        nice -n10 cargo install -f $1 &
+    if cat $tf | grep -q 'nightly.*unchanged'; then
+        rm $tf
+        exit 0
     fi
-    handles+=( $! )
+
+    rm $tf
 }
 
-join_installs() {
-    local pid
-    for pid in "${handles[@]}"; do
-        wait $pid
-    done
-}
-
-# TODO(rust-lang/cargo#2405) use cargo install --update
 rebuild_packages() {
-  fork_install https://github.com/rsolomo/cargo-check
+    cargo install -f --git https://github.com/japaric/mpc.rs &
+    cargo install -f --git https://github.com/japaric/scripts &
+    cargo install -f --git https://github.com/japaric/xargo &
+    cargo install -f --git https://github.com/phildawes/racer &
+    cargo install -f --git https://github.com/rust-lang-nursery/rustfmt &
+    cargo install -f cargo-check &
+    cargo install -f cargo-clone &
+    cargo install -f cargo-edit &
+    cargo install -f cargo-graph &
+    cargo install -f cargo-outdated &
+    cargo install -f cargo-watch &
+    cargo install -f mdbook &
 
-  fork_install cargo-clone
-
-  fork_install cargo-edit
-
-  fork_install https://github.com/kbknapp/cargo-outdated
-
-  fork_install https://github.com/passcod/cargo-watch
-
-  fork_install https://github.com/azerupi/mdBook
-
-  fork_install https://github.com/japaric/mpc.rs
-
-  fork_install https://github.com/phildawes/racer
-
-  fork_install https://github.com/rust-lang-nursery/rustfmt
-
-  fork_install https://github.com/japaric/scripts
-
-  fork_install https://github.com/japaric/xargo
-
-  pushd ~/rust/cargo-clippy
-  git pull
-  cargo clean
-  cargo update
-  # note clippy breaks every now and then
-  nice -n10 cargo build --release || true
-  popd
-
-  join_installs
+    pushd ~/rust/cargo-clippy
+    git pull
+    cargo clean
+    cargo update
+    # NOTE clippy breaks every now and then
+    nice -n10 cargo build --release || true
+    popd
 }
 
 fetch_src() {
-  local hash=$(rustc -Vv | grep commit-hash | cut -d' ' -f2)
+    local hash=$(rustc -Vv | grep commit-hash | cut -d' ' -f2)
 
-  if [ -d ~/rust/nightly ]; then
-    chmod -R a+w ~/rust/nightly
-    rm -r ~/rust/nightly
-    mkdir ~/rust/nightly
-  fi
+    if [ -d ~/rust/nightly ]; then
+        chmod -R a+w ~/rust/nightly
+        rm -r ~/rust/nightly
+        mkdir ~/rust/nightly
+    fi
 
-  curl -sL https://github.com/rust-lang/rust/archive/$hash.tar.gz | \
-      tar -xz -C ~/rust/nightly --strip-components 1
+    curl -sL https://github.com/rust-lang/rust/archive/$hash.tar.gz | \
+        tar -xz -C ~/rust/nightly --strip-components 1
 
-  rm -r ~/rust/nightly/src/test
+    rm -r ~/rust/nightly/src/test
 
-  chmod -R a-w ~/rust/nightly
+    chmod -R a-w ~/rust/nightly
 }
 
 main() {
-  update_toolchain
-  rebuild_packages
-  fetch_src
+    update_toolchain
+    rebuild_packages
+    fetch_src
 }
 
 main
