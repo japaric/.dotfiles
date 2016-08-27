@@ -17,18 +17,18 @@ update_toolchain() {
 }
 
 rebuild_packages() {
-    cargo install -f --git https://github.com/japaric/mpc.rs &
-    cargo install -f --git https://github.com/japaric/scripts &
-    cargo install -f --git https://github.com/japaric/xargo &
-    cargo install -f --git https://github.com/phildawes/racer &
-    cargo install -f --git https://github.com/rust-lang-nursery/rustfmt &
-    cargo install -f cargo-check &
-    cargo install -f cargo-clone &
-    cargo install -f cargo-edit &
-    cargo install -f cargo-graph &
-    cargo install -f cargo-outdated &
-    cargo install -f cargo-watch &
-    cargo install -f mdbook &
+    nice -n10 cargo install -f --git https://github.com/japaric/mpc.rs &
+    nice -n10 cargo install -f --git https://github.com/japaric/scripts &
+    nice -n10 cargo install -f --git https://github.com/japaric/xargo &
+    nice -n10 cargo install -f --git https://github.com/phildawes/racer &
+    nice -n10 cargo install -f --git https://github.com/rust-lang-nursery/rustfmt &
+    nice -n10 cargo install -f cargo-check &
+    nice -n10 cargo install -f cargo-clone &
+    nice -n10 cargo install -f cargo-edit &
+    nice -n10 cargo install -f cargo-graph &
+    nice -n10 cargo install -f cargo-outdated &
+    nice -n10 cargo install -f cargo-watch &
+    nice -n10 cargo install -f mdbook &
 
     pushd ~/rust/cargo-clippy
     git pull
@@ -56,10 +56,16 @@ fetch_src() {
     chmod -R a-w ~/rust/nightly
 }
 
+install_completions() {
+    local sysroot=$(rustc --print sysroot)
+    curl -sSL https://raw.githubusercontent.com/rust-lang-nursery/rustup.rs/master/src/rustup-cli/zsh/_rustup > $sysroot/share/zsh/site-functions/_rustup
+}
+
 main() {
     update_toolchain
     rebuild_packages
     fetch_src
+    install_completions
 }
 
 main
