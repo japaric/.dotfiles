@@ -5,6 +5,7 @@ plugins=(
   colored-man
   extract
   git
+  rust
   systemd
   vi-mode
   zsh-syntax-highlighting
