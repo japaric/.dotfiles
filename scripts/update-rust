@@ -39,23 +39,6 @@ rebuild_packages() {
     popd
 }
 
-fetch_src() {
-    local hash=$(rustc -Vv | grep commit-hash | cut -d' ' -f2)
-
-    if [ -d ~/rust/nightly ]; then
-        chmod -R a+w ~/rust/nightly
-        rm -r ~/rust/nightly
-        mkdir ~/rust/nightly
-    fi
-
-    curl -sL https://github.com/rust-lang/rust/archive/$hash.tar.gz | \
-        tar -xz -C ~/rust/nightly --strip-components 1
-
-    rm -r ~/rust/nightly/src/test
-
-    chmod -R a-w ~/rust/nightly
-}
-
 install_completions() {
     local sysroot=$(rustc --print sysroot)
     curl -sSL https://raw.githubusercontent.com/rust-lang-nursery/rustup.rs/master/src/rustup-cli/zsh/_rustup > $sysroot/share/zsh/site-functions/_rustup

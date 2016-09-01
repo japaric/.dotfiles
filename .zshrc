@@ -60,7 +60,7 @@ PATH="$PATH:$HOME/.dotfiles/scripts"
 PATH="$PATH:$HOME/.rbenv/bin"
 
 # for racer
-export RUST_SRC_PATH=~/rust/nightly/src
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 export CARGO_HOME=~/.cargo
 
 # for Rust
