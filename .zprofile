@@ -1,8 +1,3 @@
-# mpd
-[ ! -s ~/.config/mpd/pid ] && \
-    command -v mpd >/dev/null 2>&1 && \
-    mpd
-
 # X server
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && \
   exec startx
