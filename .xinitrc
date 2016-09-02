@@ -24,4 +24,5 @@ fi
 numlockx on &
 PATH="${PATH}:${HOME}/.cargo/bin" sxhkd &
 unclutter &
+(sleep 1 && redshift) &
 exec bspwm
