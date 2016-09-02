@@ -101,7 +101,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-chalk-dark)
+   dotspacemacs-themes '(spacemacs-dark
+                         base16-chalk)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -264,7 +265,7 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
-you should place you code here."
+you should place your code here."
   (add-hook 'cuda-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   (add-hook 'js2-mode-hook 'flycheck-mode)
   (add-hook 'json-mode-hook 'flycheck-mode)
