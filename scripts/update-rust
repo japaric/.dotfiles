@@ -19,7 +19,6 @@ update_toolchain() {
 rebuild_packages() {
     nice -n10 cargo install -f --git https://github.com/japaric/mpc.rs &
     nice -n10 cargo install -f --git https://github.com/japaric/scripts &
-    nice -n10 cargo install -f --git https://github.com/japaric/xargo &
     nice -n10 cargo install -f --git https://github.com/phildawes/racer &
     nice -n10 cargo install -f --git https://github.com/rust-lang-nursery/rustfmt &
     nice -n10 cargo install -f cargo-check &
@@ -29,6 +28,7 @@ rebuild_packages() {
     nice -n10 cargo install -f cargo-outdated &
     nice -n10 cargo install -f cargo-watch &
     nice -n10 cargo install -f mdbook &
+    LIBGIT2_SYS_USE_PKG_CONFIG=1 nice -n10 cargo install -f xargo &
 
     pushd ~/rust/cargo-clippy
     git pull
@@ -47,7 +47,6 @@ install_completions() {
 main() {
     update_toolchain
     rebuild_packages
-    fetch_src
     install_completions
 }
 
