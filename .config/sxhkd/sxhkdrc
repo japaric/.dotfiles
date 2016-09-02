@@ -22,7 +22,7 @@ super + shift + {a,o,e,u}
 #
 
 super + shift + Return
-  st
+  st -f 'Fira Code:pixelsize=12'
 
 super + x
   dmenu_run -fn FiraCode-6
