@@ -27,9 +27,8 @@ autoload -U promptinit && promptinit
 prompt pure
 
 # base16-shell
-BASE16_SHELL="$HOME/.dotfiles/base16-shell/base16-chalk.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-unset $BASE16_SHELL
+BASE16_SHELL=$HOME/.dotfiles/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # "partial" history search
 bindkey '^P' history-beginning-search-backward
@@ -57,7 +56,6 @@ command -v colordiff >/dev/null 2>&1 && alias diff='colordiff'
 EDITOR=edit
 
 PATH="$PATH:$HOME/.dotfiles/scripts"
-PATH="$PATH:$HOME/.rbenv/bin"
 
 # for racer
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
@@ -66,17 +64,7 @@ export CARGO_HOME=~/.cargo
 # for Rust
 export RUST_NEW_ERROR_FORMAT=true
 
-if [ -d ~/openwrt/current ]; then
-  toolchain=$(find ~/openwrt/current/ -maxdepth 1 -name 'toolchain*' -print -quit)
-  if [ ! -z $toolchain ]; then
-    PATH="$PATH:$toolchain/bin"
-    export STAGING_DIR=~/openwrt/current
-  fi
-  unset toolchain
-fi
-
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
-command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 true
