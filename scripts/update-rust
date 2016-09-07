@@ -44,16 +44,10 @@ install_completions() {
     curl -sSL https://raw.githubusercontent.com/rust-lang-nursery/rustup.rs/master/src/rustup-cli/zsh/_rustup > $sysroot/share/zsh/site-functions/_rustup
 }
 
-# how reads them anyway
-remove_docs() {
-    rm -rf $(rustc --print sysroot)/share/doc
-}
-
 main() {
     update_toolchain
     rebuild_packages
     install_completions
-    remove_docs
 }
 
 main
